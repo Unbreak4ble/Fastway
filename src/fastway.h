@@ -1,20 +1,11 @@
-#pragma once
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include "components.h"
 
-/*
-codes:
-0 : parede
-1 : trilha
-2 : começo
-3 : fim
-4 : trilha percorrida
-*/
-
 namespace FastWay {
   
+   // responsavel por calcular a trajetória
    std::vector<std::vector<components::xy>> start(std::vector<std::vector<int>> lab){
      auto newlab = lab;
      auto SE = components::getSE(lab);
@@ -22,20 +13,10 @@ namespace FastWay {
      bool stop = prox.idx.x == -1 && prox.idx.y == -1;
      std::vector<std::vector<components::xy>> results;
      std::vector<components::xy> passed;
-     std::string reto = stop == false ? prox.opt : "";
+     std::string reto = !stop ? prox.opt : "";
      bool needReturn = false;
-     int i=0;
- 
      
      while(!stop){
-       
-       i++;
-       if(i>20)
-       {
-         std::cout << "aborted" << std::endl;
-         stop = true;
-       }
-       
        auto idx3 = components::getAproxIdx(newlab, 3, prox.idx);
      
        passed.push_back(prox.idx);
@@ -49,8 +30,7 @@ namespace FastWay {
           components::change(newlab, prox.idx, 4);
          
             auto idx = components::walk(newlab, prox.idx, reto);
-            std::cout << prox.opt << " | " << prox.idx.x << "/" << prox.idx.y  << " - " << idx.x << "/" << idx.y << " | " << reto << std::endl;
-        
+            
            if(!(idx.x == -1 && idx.y == -1) && components::getPos(newlab, idx) == 1){
            prox.idx = idx;
            prox.opt = reto;
@@ -67,11 +47,8 @@ namespace FastWay {
          
       
        }else{
-          std::cout << "need return" << std::endl;
-          
           for(int i=passed.size()-1; i>=0 && needReturn == true; i--){
-          std::cout << "xy: " << passed[i].x << "/" << passed[i].y << std::endl;
-           prox = components::getAproxIdx(newlab, 1, passed[i]);
+            prox = components::getAproxIdx(newlab, 1, passed[i]);
            
            if(!(prox.idx.x == -1 && prox.idx.y == -1))
            {
@@ -88,12 +65,10 @@ namespace FastWay {
        }
      }
      
-     components::print(newlab);
-     std::cout << "-----------" << std::endl;
-     
      return results;
    }
   
+   
    std::vector<std::vector<int>> run(std::vector<std::vector<int>> lab){
      auto results = start(lab);
      components::replaceAll(lab, results, 4);
