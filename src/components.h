@@ -176,6 +176,22 @@ namespace components {
      return content;
   }
   
+  //responsavel por obter a trajetória mais otimizada
+  std::vector<xy> getBetter(std::vector<std::vector<xy>> results){
+    std::vector<xy> better;
+    
+    for(auto r : results){
+      int i=0;
+      for(auto rr : results)
+        if(r.size() <= rr.size())
+        i++;
+      
+      if(i >= results.size())
+      better = r;
+    }
+    
+    return better;
+  }
   
   // responsavel por interpretar o texto e transformar ela em um vetor bidimensional
   std::vector<std::vector<int>> interpret(std::string content){
@@ -249,3 +265,4 @@ namespace components {
     return lab;
   }
 }
+
