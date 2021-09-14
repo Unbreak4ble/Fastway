@@ -30,7 +30,7 @@ int main() {
 ```
 Códigos: <br/>
 2 : começo do labirinto/posição atual <br/>
-0 : parede <br/>
+0 : parede/trilha que não pode passar <br/>
 1 : trilha <br/>
 3 : final do labirinto <br/>
 4 : trilha percorrida <br/>
