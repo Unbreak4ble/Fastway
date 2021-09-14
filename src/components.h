@@ -193,6 +193,32 @@ namespace components {
     return better;
   }
   
+  // verifica se a trilha ja foi percorrida
+  bool alreadyPassed(std::vector<std::vector<xy>> results, std::vector<xy> passed){
+    for(auto rs : results){
+      int i=0;
+      for(xy rr : passed)
+      for(xy rrr : rs)
+        if(rr.x == rrr.x && rr.y == rrr.y)
+          i++;
+     
+      if(i >= results.size())
+        return true;
+    }
+    
+    return false;
+  }
+  
+  //
+  std::vector<xy> slice(std::vector<xy> res, int begin, int end){
+    std::vector<xy> result;
+    for(int i=0; i<res.size(); i++)
+      if(i >= begin && i <= end)
+        result.push_back(res[i]);
+    
+    return result;
+  }
+  
   // responsavel por interpretar o texto e transformar ela em um vetor bidimensional
   std::vector<std::vector<int>> interpret(std::string content){
     std::vector<std::vector<int>> lab;
