@@ -33,15 +33,6 @@ Códigos: <br/>
 3 : final do labirinto <br/>
 4 : trilha percorrida <br/>
 
-### Saída
-```
-2,4,4,4,4
-0,0,0,0,4
-1,1,4,4,4
-0,0,4,0,0
-3,4,4,1,1
-```
-
 ### usando vetores
 ```cpp
 #include "fastway.h"
@@ -62,4 +53,14 @@ int main() {
   
   return 0;
 }
+```
+
+
+### Saída
+```
+2 4 4 4 4
+0 0 0 0 4
+1 1 4 4 4
+0 0 4 0 0
+3 4 4 1 1
 ```
