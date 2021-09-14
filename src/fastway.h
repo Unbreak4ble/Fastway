@@ -43,12 +43,11 @@ namespace FastWay {
            needReturn = true;
            prox = components::getAproxIdx(newlab, 1, prox.idx);
            }
-           
-         
       
        }else{
           for(int i=passed.size()-1; i>=0 && needReturn == true; i--){
             prox = components::getAproxIdx(newlab, 1, passed[i]);
+            auto prox2 = components::getAproxIdx(newlab, 2, passed[i]);
            
            if(!(prox.idx.x == -1 && prox.idx.y == -1))
            {
@@ -56,12 +55,27 @@ namespace FastWay {
              passed.push_back(prox.idx);
              components::change(newlab, prox.idx, 4);
              needReturn = false;
+           }else if(!(prox2.idx.x == -1 && prox2.idx.y == -1)){
+             reto = prox2.opt;
+             passed.erase(passed.end()-1);
+             components::change(newlab, passed[i], 0);
+             prox = components::getAproxIdx(newlab, 1, prox2.idx);
+             needReturn = false;
            }else
             passed.erase(passed.end()-1);
             
           }
           
-         stop = needReturn == true;
+         stop = needReturn;
+       }
+     }
+     
+     for(auto vetor : results){
+       components::replaceAll(newlab, {vetor[0], vetor[vetor.size()-1]}, 0);
+       auto newTraje = start(newlab);
+       if(newTraje.size() > 0){
+         for(auto traje : newTraje)
+           results.push_back(traje);
        }
      }
      
@@ -71,7 +85,8 @@ namespace FastWay {
    
    std::vector<std::vector<int>> run(std::vector<std::vector<int>> lab){
      auto results = start(lab);
-     components::replaceAll(lab, results, 4);
+     std::vector<components::xy> better = components::getBetter(results);
+     components::replaceAll(lab, better, 4);
      
      return lab;
    }
