@@ -1,3 +1,7 @@
+/*
+  biblioteca responsável pela manipulação do vetor
+*/
+
 namespace components {
   struct xy {
     int x;
@@ -9,6 +13,7 @@ namespace components {
     xy idx;
   };
   
+  // imprime o vetor
   void print(std::vector<std::vector<int>> res){
      for(int i=0; i<res.size(); i++){
        for(int j=0; j<res[i].size(); j++)
@@ -18,6 +23,20 @@ namespace components {
       }
    }
 
+   /*
+     move para uma posição a mais no vetor.
+     codigos:
+     t : top
+     b : bottom
+     l : left
+     r : right
+     
+     combinações de codigo:
+     tl : top left
+     tr : top right
+     br : bottom right
+     bl : bottom left
+   */
    xy walk(std::vector<std::vector<int>> lab, xy idx, std::string opt){
      xy pos = {-1, -1};
      
@@ -56,7 +75,8 @@ namespace components {
 
      return pos;
    }
-
+   
+   // obtem o valor de uma posição no vetor
    int getPos(std::vector<std::vector<int>> lab, xy posis){
     for(int i=0; i<lab.size(); i++)
        for(int j=0; j<lab[i].size(); j++)
@@ -65,7 +85,8 @@ namespace components {
          
      return -1;
    }
-
+   
+   // obtem a posição do começo e do final
    std::vector<xy> getSE(std::vector<std::vector<int>> lab){
         std::vector<xy> x = {{-1, -1}, {-1, -1}};
         int h = -1;
@@ -93,6 +114,7 @@ namespace components {
      return x;
    }
    
+   // altera o valor de uma posição no vetor
  void change(std::vector<std::vector<int>>& lab, xy posis, int value){
     
     for(int i=0; i<lab.size(); i++)
@@ -103,6 +125,7 @@ namespace components {
        }
   }
   
+  // obtem uma posição estável
   reOpt getAproxIdx(std::vector<std::vector<int>> lab, int alvo, xy idx){
     reOpt res = {"", {-1, -1}};
     std::vector<xy> posis = {
@@ -120,17 +143,20 @@ namespace components {
     return res;
   }
   
+  // substitui o valor de cada posição por um novo valor
   void replaceAll(std::vector<std::vector<int>>& lab, std::vector<xy> idxs, int val){
     for(auto i : idxs)
       change(lab, i, val);
   }
   
+  // substitui o valor de cada posição por um novo valor
   void replaceAll(std::vector<std::vector<int>>& lab, std::vector<std::vector<xy>> idxs, int val){
     for(auto i : idxs)
        for(xy j : i)
          change(lab, j, val);
   }
   
+  // lê um arquivo
   std::string readFile(std::string filename){
      std::ifstream file;
      std::string line, content;
@@ -151,7 +177,7 @@ namespace components {
   }
   
   
-  
+  // responsavel por interpretar o texto e transformar ela em um vetor bidimensional
   std::vector<std::vector<int>> interpret(std::string content){
     std::vector<std::vector<int>> lab;
     std::string num_s;
@@ -194,12 +220,12 @@ namespace components {
           current = {};
           }
           else
-          throw std::string("Invalid text");
+          throw std::string("Invalid token");
         break;
         
         default: 
           if(t != ' ')
-          throw std::string("Invalid text");
+          throw std::string("Invalid token");
         break;
       }
      }else{
@@ -215,7 +241,7 @@ namespace components {
           current = {};
           }
           else
-          throw std::string("Invalid text");
+          throw std::string("Invalid token");
      }
     }
     
@@ -223,4 +249,3 @@ namespace components {
     return lab;
   }
 }
-
