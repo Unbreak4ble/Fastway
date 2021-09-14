@@ -23,9 +23,9 @@ int main() {
 0,0,1,0,1
 3,1,1,1,1
 ```
-Onde:
-2 : começo do labirinto/posição atual
-0 : parede
-1 : trilha
-3 : final do labirinto
-4 : trilha percorrida
+Onde: <br/>
+2 : começo do labirinto/posição atual <br/>
+0 : parede <br/>
+1 : trilho <br/>
+3 : final do labirinto <br/>
+4 : trilha percorrida <br/>
