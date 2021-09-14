@@ -5,6 +5,7 @@
 
 namespace FastWay {
   
+   
    // responsavel por calcular a trajetória
    std::vector<std::vector<components::xy>> start(std::vector<std::vector<int>> lab){
      auto newlab = lab;
@@ -70,13 +71,21 @@ namespace FastWay {
        }
      }
      
-     for(auto vetor : results){
-       components::replaceAll(newlab, {vetor[0], vetor[vetor.size()-1]}, 0);
-       auto newTraje = start(newlab);
-       if(newTraje.size() > 0){
-         for(auto traje : newTraje)
-           results.push_back(traje);
+     if(results.size() > 0)
+     for(int i=0; i<results[0].size(); i++){
+       components::xy pos = results[0][i];
+       prox = components::getAproxIdx(newlab, 1, pos);
+       
+       
+       if(needReturn){
+         components::replaceAll(newlab, components::slice(results[0], 0, i), 1);
+         components::change(newlab, pos, 0);
+         auto otherLabPos = start(newlab);
+         for(auto rePos : otherLabPos)
+           results.push_back(rePos);
        }
+       if(!(prox.idx.x == -1 && prox.idx.y == -1) && needReturn == false)
+         needReturn = true;
      }
      
      return results;
