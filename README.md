@@ -26,6 +26,25 @@ int main() {
 Onde: <br/>
 2 : começo do labirinto/posição atual <br/>
 0 : parede <br/>
-1 : trilho <br/>
+1 : trilha <br/>
 3 : final do labirinto <br/>
 4 : trilha percorrida <br/>
+
+
+### usando vetores
+```cpp
+#include "fastway.h"
+#include <iostream>
+
+int main() {
+  std::vector<std::vector<int>> labirinto = {
+
+  };
+  
+  std::vector<std::vector<int>> result = FastWay::run(labirinto);
+  
+  components::print(result); //imprime o vetor bidimensional
+  
+  return 0;
+}
+```
