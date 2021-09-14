@@ -4,6 +4,8 @@ Algoritmo que busca o final de um labirinto
 ### como funciona
 O algoritmo escolhe uma posição estável para passar, caso a trajetória dê errado, ela volta para trás até achar uma posição estável, se não achar, ela volta para trás novamente e assim em diante até achar a posição certa que leva para o final
 
+##### a trajetória talvez não seja a mais otimizada, o algoritmo é novo
+
 ### uso com arquivo
 ```cpp
 #include "fastway.h"
