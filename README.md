@@ -20,16 +20,24 @@ int main() {
 2,1,1,1,1
 0,0,0,0,1
 1,1,1,1,1
-0,0,1,0,1
+0,0,1,0,0
 3,1,1,1,1
 ```
-Onde: <br/>
+Códigos: <br/>
 2 : começo do labirinto/posição atual <br/>
 0 : parede <br/>
 1 : trilha <br/>
 3 : final do labirinto <br/>
 4 : trilha percorrida <br/>
 
+### Saída
+```
+2,4,4,4,4
+0,0,0,0,4
+1,1,4,4,4
+0,0,4,0,0
+3,4,4,1,1
+```
 
 ### usando vetores
 ```cpp
