@@ -6,11 +6,11 @@
 
 /*
 codes:
-0 : wall
-1 : way
-2 : begin/actually position
-3 : end
-4 : passed
+0 : parede
+1 : trilha
+2 : começo
+3 : fim
+4 : trilha percorrida
 */
 
 namespace FastWay {
