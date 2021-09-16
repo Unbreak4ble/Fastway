@@ -5,7 +5,6 @@
 
 namespace FastWay {
   
-   
    // responsavel por calcular a trajetória
    std::vector<std::vector<components::xy>> start(std::vector<std::vector<int>> lab){
      auto newlab = lab;
@@ -14,7 +13,7 @@ namespace FastWay {
      bool stop = prox.idx.x == -1 && prox.idx.y == -1;
      std::vector<std::vector<components::xy>> results;
      std::vector<components::xy> passed;
-     std::string reto = !stop ? prox.opt : "";
+     std::string reto = prox.opt;
      bool needReturn = false;
      
      while(!stop){
@@ -70,12 +69,12 @@ namespace FastWay {
          stop = needReturn;
        }
      }
+     needReturn = true;
      
      if(results.size() > 0)
      for(int i=0; i<results[0].size(); i++){
        components::xy pos = results[0][i];
        prox = components::getAproxIdx(newlab, 1, pos);
-       
        
        if(needReturn){
          components::replaceAll(newlab, components::slice(results[0], 0, i), 1);
@@ -83,6 +82,8 @@ namespace FastWay {
          auto otherLabPos = start(newlab);
          for(auto rePos : otherLabPos)
            results.push_back(rePos);
+         
+         needReturn = false;
        }
        if(!(prox.idx.x == -1 && prox.idx.y == -1) && needReturn == false)
          needReturn = true;
@@ -92,7 +93,7 @@ namespace FastWay {
    }
   
    
-   std::vector<std::vector<int>> run(std::vector<std::vector<int>> lab){
+     std::vector<std::vector<int>> run(std::vector<std::vector<int>> lab){
      auto results = start(lab);
      std::vector<components::xy> better = components::getBetter(results);
      components::replaceAll(lab, better, 4);
