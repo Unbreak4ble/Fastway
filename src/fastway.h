@@ -29,11 +29,16 @@ namespace FastWay {
        if(!needReturn){
           components::change(newlab, prox.idx, 4);
          
-            auto idx = components::walk(newlab, prox.idx, reto);
-            
+           auto idx = components::walk(newlab, prox.idx, reto);
            if(!(idx.x == -1 && idx.y == -1) && components::getPos(newlab, idx) == 1){
+           auto test =  components::getAproxIdx(newlab, 1, prox.idx, prox.opt);
+           if(test.idx.x == -1 && test.idx.y == -1){
            prox.idx = idx;
            prox.opt = reto;
+           }else{
+           prox.idx = test.idx;
+           prox.opt = test.opt;
+           }
            }else
            if(!(prox.idx.x == -1 && prox.idx.y == -1)){
            prox = components::getAproxIdx(newlab, 1, prox.idx);
@@ -68,6 +73,7 @@ namespace FastWay {
           
          stop = needReturn;
        }
+       
      }
      needReturn = true;
      
