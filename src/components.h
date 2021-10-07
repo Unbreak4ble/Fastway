@@ -76,6 +76,8 @@ namespace components {
      return pos;
    }
    
+   
+   
    // obtem o valor de uma posição no vetor
    int getPos(std::vector<std::vector<int>> lab, xy posis){
     for(int i=0; i<lab.size(); i++)
@@ -135,6 +137,33 @@ namespace components {
       walk(lab, idx, "b"),
     };
     std::vector<std::string> sides = {"r", "l", "t", "b"};
+    
+    for(int i=0; i<posis.size(); i++)
+      if(!(posis[i].x == -1 && posis[i].y == -1) && getPos(lab, posis[i]) == alvo)
+       res = {sides[i], posis[i]};
+    
+    return res;
+  }
+  
+  reOpt getAproxIdx(std::vector<std::vector<int>> lab, int alvo, xy idx, std::string side){
+    reOpt res = {"", {-1, -1}};
+    std::vector<xy> posis;
+    
+    std::vector<std::string> sides = {"r", "l", "t", "b"},
+     vertical = {"t", "b"};
+     
+    if(vertical[0] == side || vertical[1] == side)
+    posis = {
+      walk(lab, idx, "r"),
+      walk(lab, idx, "l")
+    };
+    else
+    posis = {
+      walk(lab, idx, "t"),
+      walk(lab, idx, "b")
+    };
+    
+    
     
     for(int i=0; i<posis.size(); i++)
       if(!(posis[i].x == -1 && posis[i].y == -1) && getPos(lab, posis[i]) == alvo)
@@ -291,4 +320,3 @@ namespace components {
     return lab;
   }
 }
-
