@@ -17,7 +17,7 @@ int main() {
 }
 ```
 
-### estrutura do labirinto
+### estrutura do labirinto em arquivo
 ```
 2,1,1,1,1
 0,0,0,0,1
@@ -26,11 +26,12 @@ int main() {
 3,1,1,1,1
 ```
 Códigos: <br/>
-2 : começo do labirinto/posição atual <br/>
+2 : inicio do labirinto <br/>
 0 : parede/trilha que não pode passar <br/>
 1 : trilha <br/>
 3 : final do labirinto <br/>
 4 : trilha percorrida <br/>
+5 : posição atual (usada somente no callback)<br/>
 
 ### usando vetores
 ```cpp
@@ -62,4 +63,33 @@ int main() {
 1 1 4 4 4
 0 0 4 0 1
 3 4 4 1 1
+```
+
+# callbacks ???
+Sim. Seu uso não é obrigatório, mas isso irá deixar o terminal mais legal podendo visualizar cada ação do algoritmo sobre o labirinto.
+
+```cpp
+#include "src/fastway.h"
+#include <iostream>
+#include <unistd.h>
+
+using namespace std;
+
+// Estrutura padrão da função
+void func(std::vector<std::vector<int>> lab){
+   int seg=1;
+   system("clear");
+
+   FastWay::print(lab, true); // imprime o labirinto em forma colorida.
+
+   usleep(seg*100*1000);
+}
+
+int main() {
+	vector<vector<int>> res = FastWay::run("file.txt", func); // imprime o labirinto e retorna um callback a cada ação.
+	printf("\n");
+	FastWay::print(res); // imprime o labirinto.
+
+	return 0;
+}
 ```
