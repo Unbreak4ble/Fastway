@@ -8,15 +8,15 @@ void func(std::vector<std::vector<int>> lab){
    int seg=1;
    system("clear");
 
-   FastWay::print(lab, true);
+   FastWay::print(lab, true); // imprime o labirinto em forma colorida.
 
-   usleep(seg*1*1000);
+   usleep(seg*100*1000);
 }
 
 int main() {
-	vector<vector<int>> res = FastWay::run("file.txt", func);
+	vector<vector<int>> res = FastWay::run("file.txt", func); // imprime o labirinto e retorna um callback a cada ação.
 	printf("\n");
-	FastWay::print(res, true);
+	FastWay::print(res, true); // imprime o labirinto em forma colorida.
 
 	return 0;
 }
