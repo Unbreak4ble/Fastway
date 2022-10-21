@@ -10,21 +10,13 @@ void func(std::vector<std::vector<int>> lab){
 
    FastWay::print(lab, true);
 
-   usleep(seg*100*1000);
+   usleep(seg*1*1000);
 }
 
 int main() {
-	vector<vector<int>> lab = {
-   {2,1,1,1,1},
-   {0,0,0,0,1},
-   {1,1,0,1,1},
-   {0,0,1,0,1},
-   {3,1,1,1,1}
-  };
-
-	vector<vector<int>> res = FastWay::run(lab, func);
-
-	FastWay::print(res);
+	vector<vector<int>> res = FastWay::run("file.txt", func);
+	printf("\n");
+	FastWay::print(res, true);
 
 	return 0;
 }
